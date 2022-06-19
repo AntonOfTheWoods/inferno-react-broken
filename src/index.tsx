@@ -2,7 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createElement } from 'inferno-create-element';
+import { render } from 'inferno';
+
+class Other extends React.Component<{name: string}, {}> {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,10 +17,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App />
+    <Other name="World" />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+render(
+  createElement('div', { className: 'test' }, "I'm a child!"),
+  document.getElementById("app")
+);
